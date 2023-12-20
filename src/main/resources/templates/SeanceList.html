@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Seances List</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            color: #333;
+            text-align: center;
+        }
+
+        table {
+            width: 80%;
+            margin: 20px auto;
+            border-collapse: collapse;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        a {
+            display: inline-block;
+            padding: 8px;
+            text-decoration: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 4px;
+            margin-right: 10px;
+            justify-content: center;
+        }
+
+        a:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+<h2>Seance List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Date Seance</th>
+        <th>Duration</th>
+        <th>course</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="seance : ${seances}">
+        <td th:text="${seance.seanceId}"></td>
+        <td th:text="${seance.date}"></td>
+        <td th:text="${seance.duration}"></td>
+        <td th:text="${seance.course}"></td>
+        <td>
+            <a th:href="@{|/seances/edit/${seance.seanceId}|}">Edit</a>
+            <a th:href="@{/seances/{id}/delete(id=${seance.seanceId})}" onclick="return confirm('Are you sure?')">Delete</a>
+            <a th:href="@{|/seances/edit/${seance.seanceId}|}">Details</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a th:href="@{/seances/add}">Add Seance</a>
+</body>
+</html>
